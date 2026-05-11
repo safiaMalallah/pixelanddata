@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>DATA & PIXEL | Data Science Detective Adventure</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --teal: #00A6A6;
+      --deep-teal: #047C7C;
+      --yellow: #FFD447;
+      --gold: #F4A300;
+      --cream: #FFF7E6;
+      --orange: #FF8A3D;
+      --navy: #123047;
+      --white: #ffffff;
+      --soft: #F4FBFB;
+      --shadow: 0 18px 45px rgba(18, 48, 71, 0.16);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      color: var(--navy);
+      background: #FFF8E8;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 7%;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 8px 24px rgba(18, 48, 71, 0.08);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Baloo 2', cursive;
+      font-weight: 800;
+      font-size: 1.55rem;
+      color: var(--deep-teal);
+    }
+
+    .brand img {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      border-radius: 12px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      font-weight: 600;
+      font-size: 0.94rem;
+      align-items: center;
+    }
+
+    .nav-links a:hover { color: var(--teal); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: none;
+      border-radius: 999px;
+      padding: 13px 22px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      text-align: center;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary {
+      background: var(--yellow);
+      color: var(--navy);
+    }
+
+    .btn-light {
+      background: white;
+      color: var(--deep-teal);
+    }
+
+    .btn-secondary {
+      background: var(--teal);
+      color: white;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      min-height: 760px;
+      padding: 90px 7% 70px;
+      gap: 50px;
+      align-items: center;
+      background: #11B5B5;
+      color: white;
+    }
+
+    .hero::after {
+      content: "⭐ 🤖 🔎 📊 ⭐ 🤖 🔎 📊 ⭐ 🤖 🔎 📊";
+      position: absolute;
+      top: 30px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 1.6rem;
+      letter-spacing: 22px;
+      opacity: 0.15;
+      pointer-events: none;
+    }
+
+    .hero-content,
+    .hero-visual {
+      position: relative;
+      z-index: 2;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-family: 'Baloo 2', cursive;
+      font-size: clamp(3rem, 7vw, 6.8rem);
+      line-height: 0.9;
+      margin: 0 0 20px;
+      letter-spacing: -1px;
+    }
+
+    .hero h1 span { color: var(--yellow); }
+
+    .hero p {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      max-width: 650px;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .hero-image-card {
+      position: relative;
+      min-height: 500px;
+      border-radius: 40px;
+      background: #7AD9D9;
+      border: 6px solid rgba(255, 255, 255, 0.55);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.18);
+      padding: 28px;
+      overflow: hidden;
+    }
+
+    .hero-image-card img {
+      width: 100%;
+      height: 100%;
+      min-height: 440px;
+      object-fit: cover;
+      border-radius: 32px;
+    }
+
+    section { padding: 85px 7%; }
+
+    .section-title {
+      text-align: center;
+      max-width: 850px;
+      margin: 0 auto 46px;
+    }
+
+    .section-title h2 {
+      font-family: 'Baloo 2', cursive;
+      font-size: clamp(2.2rem, 4vw, 3.6rem);
+      margin: 0 0 12px;
+      color: var(--deep-teal);
+    }
+
+    .section-title p {
+      margin: 0;
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(0, 166, 166, 0.12);
+    }
+
+    .card h3 {
+      margin: 0 0 12px;
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.7rem;
+      color: var(--deep-teal);
+    }
+
+    .card p {
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    .image-icon {
+      width: 92px;
+      height: 92px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+    }
+
+    .image-icon img {
+      width: 92px;
+      height: 92px;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 18px rgba(18, 48, 71, 0.12));
+    }
+
+    .icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 20px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--yellow), var(--orange));
+      font-size: 1.7rem;
+      margin-bottom: 18px;
+    }
+
+    .characters { background: var(--cream); }
+
+    .character-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 28px;
+    }
+
+    .character-card {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 24px;
+      align-items: center;
+      background: white;
+      border-radius: 34px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .character-image {
+      min-height: 260px;
+      border-radius: 28px;
+      background: #DFF8F5;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .character-image img {
+      max-height: 260px;
+      width: auto;
+      margin: 0 auto;
+      object-fit: contain;
+    }
+
+    .badges { background: var(--soft); }
+
+    .badge-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .badge {
+      background: white;
+      border-radius: 24px;
+      padding: 22px 14px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      border: 2px solid rgba(255, 212, 71, 0.5);
+      font-weight: 800;
+    }
+
+    .badge-symbol {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 12px;
+      background: linear-gradient(135deg, var(--yellow), var(--gold));
+      font-size: 2rem;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 34px;
+    }
+
+    .step {
+      background: white;
+      border-radius: 22px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+      border-top: 6px solid var(--teal);
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .number {
+      display: inline-grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--teal);
+      color: white;
+      margin-bottom: 10px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .gallery-item {
+      min-height: 180px;
+      border-radius: 26px;
+      background: #DFF8F5;
+      border: 3px dashed rgba(4, 124, 124, 0.2);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-weight: 800;
+      color: var(--deep-teal);
+      padding: 18px;
+    }
+
+    .request {
+      position: relative;
+      overflow: hidden;
+      background: #FFD447;
+    }
+
+    .request::before {
+      content: "⭐ 🔎 📊 🤖 💡 ⭐ 🔎 📊";
+      position: absolute;
+      left: 4%;
+      right: 4%;
+      top: 24px;
+      text-align: center;
+      font-size: 1.7rem;
+      letter-spacing: 18px;
+      opacity: 0.22;
+      pointer-events: none;
+    }
+
+    .request-box {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 34px;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.94);
+      border-radius: 42px;
+      box-shadow: var(--shadow);
+      padding: 42px;
+      border: 5px solid rgba(255, 255, 255, 0.75);
+    }
+
+    .request-box h2 {
+      font-family: 'Baloo 2', cursive;
+      font-size: 3rem;
+      color: var(--deep-teal);
+      margin: 0 0 12px;
+      line-height: 1.1;
+    }
+
+    .request-box p { line-height: 1.8; }
+
+    .request-highlight {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #E7FAF8;
+      color: var(--deep-teal);
+      border: 2px solid rgba(0, 166, 166, 0.22);
+      padding: 12px 16px;
+      border-radius: 22px;
+      font-weight: 800;
+      margin: 8px 0 18px;
+    }
+
+    .request-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 18px 0;
+    }
+
+    .request-pill {
+      background: var(--yellow);
+      color: var(--navy);
+      border-radius: 999px;
+      padding: 8px 13px;
+      font-weight: 800;
+      font-size: 0.92rem;
+      box-shadow: 0 8px 18px rgba(244, 163, 0, 0.18);
+    }
+
+    .form-card {
+      background: #EAFBFB;
+      border-radius: 34px;
+      padding: 26px;
+      border: 2px solid rgba(0, 166, 166, 0.20);
+      box-shadow: 0 16px 35px rgba(0, 166, 166, 0.10);
+    }
+
+    .form-card h3 {
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.8rem;
+      color: var(--deep-teal);
+      margin: 0 0 8px;
+    }
+
+    .form-card label {
+      display: block;
+      font-weight: 700;
+      margin: 14px 0 6px;
+    }
+
+    .form-card input,
+    .form-card select,
+    .form-card textarea {
+      width: 100%;
+      padding: 13px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(18, 48, 71, 0.18);
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+
+    .form-card textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .testimonials { background: white; }
+
+    .quote {
+      font-size: 1rem;
+      line-height: 1.8;
+      font-style: italic;
+    }
+
+    footer {
+      background: #082A3A;
+      color: white;
+      padding: 48px 7%;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 0.8fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    footer h3 {
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.8rem;
+      color: var(--yellow);
+      margin: 0 0 12px;
+    }
+
+    footer p,
+    footer a {
+      color: rgba(255, 255, 255, 0.86);
+      line-height: 1.8;
+    }
+
+    @media (max-width: 1000px) {
+      .hero,
+      .request-box {
+        grid-template-columns: 1fr;
+      }
+
+      .cards,
+      .character-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .badge-grid,
+      .steps,
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .character-card {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      section,
+      .hero,
+      .navbar,
+      footer {
+        padding-left: 5%;
+        padding-right: 5%;
+      }
+
+      .badge-grid,
+      .steps,
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 70px;
+      }
+
+      .hero-image-card {
+        min-height: 360px;
+      }
+
+      .hero-image-card img {
+        min-height: 300px;
+      }
+
+      .request-box {
+        padding: 28px;
+      }
+
+      .request-box h2 {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar">
+    <a href="https://people.cs.ksu.edu/~safia/D3.html" class="brand" target="_blank" rel="noopener">
+      <img src="public/D3.png" data-fallback="/D3.png" alt="D³ Playground Lab logo">
+      <span>DATA & PIXEL</span>
+    </a>
+
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#characters">Characters</a>
+      <a href="#experiences">Experiences</a>
+      <a href="#badges">Badges</a>
+      <a href="#teachers">Teachers</a>
+      <a href="#shop">Shop</a>
+      <a href="#press">Press</a>
+      <a href="#request">Request</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="home">
+    <div class="hero-content">
+      <span class="eyebrow">Dataying™ • Data Science for Kids</span>
+
+      <h1>DATA & <span>PIXEL</span></h1>
+
+      <p>
+        <strong>Data Science Detective Adventure</strong> helps young learners explore the world through curiosity, clues, patterns, and discovery. Designed for children, families, schools, libraries, and community events.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://www.eventbrite.com/e/1989218053747" target="_blank" rel="noopener">Get Free Movie Tickets</a>
+        <a class="btn btn-light" href="#request">Book a School or Library Visit</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-image-card">
+        <img src="public/hero-image.jpg" data-fallback="/hero-image.jpg" alt="DATA and PIXEL learning adventure scene">
+      </div>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="section-title">
+      <h2>What is DATA & PIXEL?</h2>
+      <p>
+        DATA & PIXEL is a child-centered educational world that introduces data science concepts through Dataying™, a playful approach that helps children observe, ask questions, collect clues, find patterns, and share discoveries.
+      </p>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <div class="image-icon">
+          <img src="public/Matters.png" data-fallback="/Matters.png" alt="Why it matters icon">
+        </div>
+        <h3>Why It Matters</h3>
+        <p>
+          Children are surrounded by technology every day. DATA & PIXEL encourages them to become creators, thinkers, and problem solvers rather than only consumers of technology.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="image-icon">
+          <img src="public/Theme.png" data-fallback="/Theme.png" alt="Detective theme icon">
+        </div>
+        <h3>Detective Theme</h3>
+        <p>
+          Students learn by investigating problems, looking for clues, comparing information, and sharing what they discover in age-appropriate ways.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="image-icon">
+          <img src="public/Experiences.png" data-fallback="/Experiences.png" alt="Interactive experiences icon">
+        </div>
+        <h3>Interactive Experiences</h3>
+        <p>
+          The DATA & PIXEL world includes cartoon animations, mascot-led sessions, hands-on activities, songs, badges, stickers, learning events, and teacher lessons.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="characters" id="characters">
+    <div class="section-title">
+      <h2>Meet the Characters</h2>
+      <p>
+        Data and Pixel are two curious robot characters who guide children through data science detective adventures.
+      </p>
+    </div>
+
+    <div class="character-grid">
+      <div class="character-card">
+        <div class="character-image">
+          <img src="public/data-character.png" data-fallback="/data-character.png" alt="DATA, the yellow robot character">
+        </div>
+        <div>
+          <h3>DATA</h3>
+          <p>
+            DATA is curious, energetic, and always ready to look for clues. DATA helps children notice information, ask questions, and begin thinking like data detectives.
+          </p>
+        </div>
+      </div>
+
+      <div class="character-card">
+        <div class="character-image">
+          <img src="public/pixel-character.png" data-fallback="/pixel-character.png" alt="PIXEL, the white robot character">
+        </div>
+        <div>
+          <h3>PIXEL</h3>
+          <p>
+            PIXEL helps students organize ideas, find patterns, and explain discoveries. Together, Data and Pixel make learning feel like an adventure.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experiences">
+    <div class="section-title">
+      <h2>What We Provide</h2>
+      <p>
+        DATA & PIXEL can support schools, libraries, STEM nights, summer camps, after-school programs, family learning events, and community learning experiences.
+      </p>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <div class="icon">🎞️</div>
+        <h3>Media & Songs</h3>
+        <p>Cartoon animations, songs, and storytelling experiences featuring Data and Pixel.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🤖</div>
+        <h3>Mascot Sessions</h3>
+        <p>Interactive mascot-led sessions that help children engage with the characters in memorable ways.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🧩</div>
+        <h3>Hands-On Activities</h3>
+        <p>Group activities, interactive assessments, detective challenges, and age-appropriate data science lessons.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="badges" id="badges">
+    <div class="section-title">
+      <h2>Data Detective Badges</h2>
+      <p>Children can practice foundational data skills through collectible badge themes.</p>
+    </div>
+
+    <div class="badge-grid">
+      <div class="badge"><div class="badge-symbol">📏</div>Measurement</div>
+      <div class="badge"><div class="badge-symbol">🔢</div>Counting</div>
+      <div class="badge"><div class="badge-symbol">🧺</div>Grouping</div>
+      <div class="badge"><div class="badge-symbol">↕️</div>Sorting</div>
+      <div class="badge"><div class="badge-symbol">⚖️</div>Comparing</div>
+    </div>
+
+    <div class="steps">
+      <div class="step"><span class="number">1</span><br>Understand the Problem</div>
+      <div class="step"><span class="number">2</span><br>Ask Right Questions</div>
+      <div class="step"><span class="number">3</span><br>Collect Smart Clues</div>
+      <div class="step"><span class="number">4</span><br>Find Hidden Patterns</div>
+      <div class="step"><span class="number">5</span><br>Share Results</div>
+    </div>
+  </section>
+
+  <section id="teachers">
+    <div class="section-title">
+      <h2>Teacher Lessons & Materials</h2>
+      <p>
+        Resources for educators who want to introduce Dataying™, data science, and computational thinking through child-friendly activities.
+      </p>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <div class="icon">📚</div>
+        <h3>Lesson Plans</h3>
+        <p>Ready-to-use lessons for introducing observation, counting, grouping, sorting, comparing, patterns, and data storytelling.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">📝</div>
+        <h3>Classroom Materials</h3>
+        <p>Printable activity sheets, slides, badges, certificates, coloring pages, and challenge cards for classroom or community use.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🎯</div>
+        <h3>Teacher Support</h3>
+        <p>Guides and materials to help teachers run DATA & PIXEL activities with age-appropriate explanations and simple facilitation steps.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="badges" id="shop">
+    <div class="section-title">
+      <h2>Shop & Learning Materials</h2>
+      <p>A place for DATA & PIXEL items, classroom kits, and learning materials.</p>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <div class="icon">⭐</div>
+        <h3>Stickers & Badges</h3>
+        <p>Data Detective stickers, badge sheets, reward stickers, and printable classroom badge sets.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">👕</div>
+        <h3>Shirts & Bags</h3>
+        <p>DATA & PIXEL shirts, tote bags, event items, and community learning merchandise.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">📖</div>
+        <h3>Books & Kits</h3>
+        <p>Children’s books, activity books, detective notebooks, and future Dataying learning kits.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="press">
+    <div class="section-title">
+      <h2>Media & Press</h2>
+      <p>Information for schools, libraries, partners, and media who want to learn more about DATA & PIXEL.</p>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <div class="icon">🎬</div>
+        <h3>Event Media</h3>
+        <p>Posters, screening details, trailers, event photos, and approved promotional materials.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">📰</div>
+        <h3>Press Kit</h3>
+        <p>Short descriptions, logos, character images, program summaries, and contact information.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🤝</div>
+        <h3>Partners & Sponsors</h3>
+        <p>A space to recognize schools, libraries, sponsors, and community partners supporting DATA & PIXEL.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <div class="section-title">
+      <h2>Photo Gallery</h2>
+      <p>Add photos from school visits, library programs, activities, stickers, shirts, bags, and mascot events.</p>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item">Family Learning Events</div>
+      <div class="gallery-item">Mascot Sessions</div>
+      <div class="gallery-item">Sticker Sheets</div>
+      <div class="gallery-item">Hands-On Activities</div>
+    </div>
+  </section>
+
+  <section class="testimonials" id="testimonials">
+    <div class="section-title">
+      <h2>Testimonials</h2>
+      <p>Use this section later for quotes from teachers, parents, librarians, students, and community partners.</p>
+    </div>
+
+    <div class="cards">
+      <div class="card"><p class="quote">“Add teacher or librarian testimonial here.”</p></div>
+      <div class="card"><p class="quote">“Add parent or community testimonial here.”</p></div>
+      <div class="card"><p class="quote">“Add student-friendly reaction or event quote here.”</p></div>
+    </div>
+  </section>
+
+  <section class="request" id="request">
+    <div class="request-box">
+      <div>
+        <h2>Interested in Bringing DATA & PIXEL to Your Community?</h2>
+        <div class="request-highlight">🤖 Guided by the D³ Playground Research Lab</div>
+        <p>
+          DATA & PIXEL’s Data Science Detective Adventure can be adapted for schools, libraries, STEM nights, summer camps, after-school programs, family learning events, and community programs.
+        </p>
+
+        <div class="request-options">
+          <span class="request-pill">Schools</span>
+          <span class="request-pill">Libraries</span>
+          <span class="request-pill">STEM Nights</span>
+          <span class="request-pill">Family Events</span>
+          <span class="request-pill">Summer Camps</span>
+        </div>
+
+        <p>
+          The program is coordinated and supported by the D³ Playground Research Lab in the Department of Computer Science at Kansas State University. The lab leads the design of the learning experience, activities, and outreach materials.
+        </p>
+
+        <p>
+          <strong>Email:</strong> safia@ksu.edu<br>
+          <strong>Website:</strong> https://www.pixelanddata.com/
+        </p>
+      </div>
+
+      <div class="form-card">
+        <h3>Request Information</h3>
+
+        <label for="name">Name</label>
+        <input id="name" type="text" placeholder="Your name" />
+
+        <label for="organization">Organization</label>
+        <input id="organization" type="text" placeholder="School, library, or community group" />
+
+        <label for="event-type">Event Type</label>
+        <select id="event-type">
+          <option>School Visit</option>
+          <option>Library Program</option>
+          <option>STEM Night</option>
+          <option>Family Learning Event</option>
+          <option>Summer Camp</option>
+          <option>Other</option>
+        </select>
+
+        <label for="message">Message</label>
+        <textarea id="message" placeholder="Tell us what you are interested in..."></textarea>
+
+        <button class="btn btn-secondary" style="margin-top:16px;width:100%;" type="button">Submit Request</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <h3>DATA & PIXEL</h3>
+        <p>
+          Data Science Detective Adventure introduces young learners to Dataying™, data science, curiosity, patterns, and discovery through child-friendly learning experiences.
+        </p>
+      </div>
+
+      <div>
+        <h3>Quick Links</h3>
+        <p>
+          <a href="#about">What is DATA & PIXEL?</a><br>
+          <a href="#characters">Meet the Characters</a><br>
+          <a href="#experiences">Experiences</a><br>
+          <a href="#badges">Badges</a><br>
+          <a href="#teachers">Teacher Materials</a><br>
+          <a href="#shop">Shop</a><br>
+          <a href="#press">Media & Press</a><br>
+          <a href="#request">Request Information</a>
+        </p>
+      </div>
+
+      <div>
+        <h3>Contact</h3>
+        <p>safia@ksu.edu<br>https://www.pixelanddata.com/</p>
+        <p><a href="https://people.cs.ksu.edu/~safia/D3.html" target="_blank" rel="noopener">Visit D³ Playground Research Lab</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll("img[data-fallback]").forEach(function(img) {
+      img.addEventListener("error", function() {
+        if (img.src.indexOf("/public/") !== -1 || img.getAttribute("src").startsWith("public/")) {
+          img.src = img.getAttribute("data-fallback");
+        }
+      });
+    });
+  </script>
+</body>
+</html>

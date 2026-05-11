@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DATA & PIXEL</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+  --teal:#00A6A6;
+  --deep-teal:#047C7C;
+  --yellow:#FFD447;
+  --gold:#F4A300;
+  --cream:#FFF7E6;
+  --orange:#FF8A3D;
+  --navy:#123047;
+  --white:#ffffff;
+  --soft:#F4FBFB;
+  --shadow:0 18px 45px rgba(18,48,71,0.16);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  color:var(--navy);
+  background:#FFF8E8;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+img{
+  max-width:100%;
+  display:block;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+.navbar{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 7%;
+  background:rgba(255,255,255,0.94);
+  backdrop-filter:blur(14px);
+  box-shadow:0 8px 24px rgba(18,48,71,0.08);
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-family:'Baloo 2',cursive;
+  font-weight:800;
+  font-size:1.55rem;
+  color:var(--deep-teal);
+}
+
+.brand img{
+  width:52px;
+  height:52px;
+  object-fit:contain;
+  border-radius:12px;
+}
+
+.nav-links{
+  display:flex;
+  gap:22px;
+  font-weight:600;
+}
+
+.hero{
+  display:grid;
+  grid-template-columns:1.05fr 0.95fr;
+  gap:50px;
+  align-items:center;
+  padding:90px 7% 70px;
+  background:#11B5B5;
+  color:white;
+}
+
+.eyebrow{
+  display:inline-block;
+  padding:8px 16px;
+  border-radius:999px;
+  background:rgba(255,255,255,0.16);
+  border:1px solid rgba(255,255,255,0.25);
+  font-weight:700;
+  margin-bottom:20px;
+}
+
+.hero h1{
+  font-family:'Baloo 2',cursive;
+  font-size:clamp(3rem,7vw,6.8rem);
+  line-height:0.9;
+  margin:0 0 20px;
+}
+
+.hero h1 span{
+  color:var(--yellow);
+}
+
+.hero p{
+  font-size:1.15rem;
+  line-height:1.8;
+  margin-bottom:30px;
+}
+
+.hero-actions{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  border:none;
+  border-radius:999px;
+  padding:13px 22px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.btn-primary{
+  background:var(--yellow);
+  color:var(--navy);
+}
+
+.btn-secondary{
+  background:var(--teal);
+  color:white;
+}
+
+.btn-light{
+  background:white;
+  color:var(--deep-teal);
+}
+
+.hero-image-card{
+  position:relative;
+  min-height:650px;
+  border-radius:40px;
+  background:#7AD9D9;
+  border:6px solid rgba(255,255,255,0.55);
+  box-shadow:0 30px 80px rgba(0,0,0,0.18);
+  padding:28px;
+  overflow:hidden;
+}
+
+.hero-image-card img{
+  width:100%;
+  height:100%;
+  min-height:600px;
+  object-fit:cover;
+  border-radius:32px;
+}
+
+.floating-chip{
+  position:absolute;
+  background:white;
+  color:var(--navy);
+  padding:10px 16px;
+  border-radius:18px;
+  font-weight:800;
+  box-shadow:var(--shadow);
+  z-index:5;
+  animation:float 4s ease-in-out infinite;
+}
+
+.chip-1{
+  top:30px;
+  left:30px;
+}
+
+.chip-2{
+  top:90px;
+  right:30px;
+  animation-delay:1s;
+}
+
+.chip-3{
+  bottom:40px;
+  left:40px;
+  animation-delay:2s;
+}
+
+@keyframes float{
+  0%,100%{
+    transform:translateY(0);
+  }
+  50%{
+    transform:translateY(-10px);
+  }
+}
+
+section{
+  padding:85px 7%;
+}
+
+.section-title{
+  text-align:center;
+  max-width:850px;
+  margin:0 auto 46px;
+}
+
+.section-title h2{
+  font-family:'Baloo 2',cursive;
+  font-size:clamp(2.2rem,4vw,3.6rem);
+  color:var(--deep-teal);
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:24px;
+}
+
+.card{
+  background:white;
+  border-radius:28px;
+  padding:28px;
+  box-shadow:var(--shadow);
+}
+
+.image-icon{
+  width:140px;
+  height:140px;
+  margin:0 auto 22px;
+  display:grid;
+  place-items:center;
+}
+
+.image-icon img{
+  width:140px;
+  height:140px;
+  object-fit:contain;
+}
+
+.card h3{
+  font-family:'Baloo 2',cursive;
+  color:var(--deep-teal);
+  font-size:1.7rem;
+}
+
+.characters{
+  background:var(--cream);
+}
+
+.character-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:28px;
+}
+
+.character-card{
+  background:white;
+  border-radius:34px;
+  padding:30px;
+  box-shadow:var(--shadow);
+  text-align:center;
+}
+
+.character-image{
+  min-height:260px;
+  display:grid;
+  place-items:center;
+}
+
+.character-image img{
+  max-height:260px;
+}
+
+.request{
+  background:#FFD447;
+}
+
+.request-box{
+  background:rgba(255,255,255,0.94);
+  border-radius:42px;
+  padding:42px;
+  box-shadow:var(--shadow);
+}
+
+.request-highlight{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  background:#E7FAF8;
+  color:var(--deep-teal);
+  border:2px solid rgba(0,166,166,0.22);
+  padding:12px 16px;
+  border-radius:22px;
+  font-weight:800;
+  margin:8px 0 18px;
+}
+
+.request-options{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:18px 0;
+}
+
+.request-pill{
+  background:var(--yellow);
+  color:var(--navy);
+  border-radius:999px;
+  padding:8px 13px;
+  font-weight:800;
+}
+
+footer{
+  background:#082A3A;
+  color:white;
+  padding:48px 7%;
+  text-align:center;
+}
+
+@media(max-width:1000px){
+
+.hero{
+  grid-template-columns:1fr;
+}
+
+.cards{
+  grid-template-columns:1fr;
+}
+
+.character-grid{
+  grid-template-columns:1fr;
+}
+
+.nav-links{
+  display:none;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+
+<a href="https://people.cs.ksu.edu/~safia/D3.html" target="_blank" class="brand">
+<img src="public/D3.png">
+<span>DATA & PIXEL</span>
+</a>
+
+<div class="nav-links">
+<a href="#about">About</a>
+<a href="#characters">Characters</a>
+<a href="#teachers">Teachers</a>
+<a href="#shop">Shop</a>
+</div>
+
+</nav>
+
+<header class="hero">
+
+<div>
+
+<div class="eyebrow">
+Dataying™ • Data Science for Kids
+</div>
+
+<h1>
+DATA & <span>PIXEL</span>
+</h1>
+
+<p>
+A K–5 educational adventure where curiosity, creativity, data, and discovery come together through characters, stories, movie events, badges, and hands-on experiences.
+</p>
+
+<div class="hero-actions">
+
+<a class="btn btn-primary"
+href="https://www.eventbrite.com/e/1989218053747"
+target="_blank">
+Get Free Movie Tickets
+</a>
+
+<a class="btn btn-light"
+href="#request">
+Book a School or Library Visit
+</a>
+
+</div>
+
+</div>
+
+<div class="hero-visual">
+
+<div class="hero-image-card">
+
+<img src="public/hero-image.jpg">
+
+<div class="floating-chip chip-1">
+🔎 Find Clues
+</div>
+
+<div class="floating-chip chip-2">
+📊 Patterns
+</div>
+
+<div class="floating-chip chip-3">
+⭐ Badges
+</div>
+
+</div>
+
+</div>
+
+</header>
+
+<section id="about">
+
+<div class="section-title">
+
+<h2>What is DATA & PIXEL?</h2>
+
+<p>
+DATA & PIXEL is a child-centered educational world that introduces data science concepts through Dataying™, a playful approach that helps children observe, ask questions, collect clues, find patterns, and share discoveries.
+</p>
+
+</div>
+
+<div class="cards">
+
+<div class="card">
+
+<div class="image-icon">
+<img src="public/Matters.png">
+</div>
+
+<h3>Why It Matters</h3>
+
+<p>
+Children are surrounded by technology every day. DATA & PIXEL encourages them to become creators, thinkers, and problem solvers rather than only consumers of technology.
+</p>
+
+</div>
+
+<div class="card">
+
+<div class="image-icon">
+<img src="public/Theme.png">
+</div>
+
+<h3>Detective Theme</h3>
+
+<p>
+Students learn by investigating problems, looking for clues, comparing information, and sharing what they discover in age-appropriate ways.
+</p>
+
+</div>
+
+<div class="card">
+
+<div class="image-icon">
+<img src="public/Experiences.png">
+</div>
+
+<h3>Interactive Experiences</h3>
+
+<p>
+The DATA & PIXEL world includes cartoon animations, mascot-led sessions, hands-on activities, songs, badges, stickers, learning events, and teacher lessons.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="characters" id="characters">
+
+<div class="section-title">
+
+<h2>Meet the Characters</h2>
+
+<p>
+Data and Pixel are two curious robot characters who guide children through data science detective adventures.
+</p>
+
+</div>
+
+<div class="character-grid">
+
+<div class="character-card">
+
+<div class="character-image">
+<img src="public/data-character.png">
+</div>
+
+<h3>DATA</h3>
+
+<p>
+DATA is curious, energetic, and always ready to look for clues.
+</p>
+
+</div>
+
+<div class="character-card">
+
+<div class="character-image">
+<img src="public/pixel-character.png">
+</div>
+
+<h3>PIXEL</h3>
+
+<p>
+PIXEL helps students organize ideas, find patterns, and explain discoveries.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="request" id="request">
+
+<div class="request-box">
+
+<div>
+
+<h2>
+Interested in Bringing DATA & PIXEL to Your Community?
+</h2>
+
+<div class="request-highlight">
+
+
+
+<a href="https://people.cs.ksu.edu/~safia/D3.html"
+target="_blank"
+style="color:#047c7c;font-weight:800;">
+
+D³ Playground Research Lab
+
+</a>
+
+</div>
+
+<p>
+
+
+</p>
+
+<p>
+DATA & PIXEL can support schools, libraries, STEM nights, summer camps, after-school programs, and family learning events.
+</p>
+
+<div class="request-options">
+
+<span class="request-pill">Schools</span>
+<span class="request-pill">Libraries</span>
+<span class="request-pill">STEM Nights</span>
+<span class="request-pill">Family Events</span>
+<span class="request-pill">Summer Camps</span>
+
+</div>
+
+<p>
+
+<strong>Email:</strong> safia@ksu.edu<br>
+<strong>Website:</strong> https://www.pixelanddata.com/
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<h2>DATA & PIXEL</h2>
+
+<p>
+Guided by the D³ Playground Research Lab at Kansas State University
+</p>
+
+<p>
+https://www.pixelanddata.com/
+</p>
+
+</footer>
+
+</body>
+</html>
