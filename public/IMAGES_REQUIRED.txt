@@ -1,0 +1,25 @@
+=== IMAGES TO ADD TO THIS /public FOLDER ===
+
+Copy these files from your Windows folder (C:\Users\safia\web\pixelanddata\public\) 
+into this /public folder:
+
+  school-visits.png      → Used in Experiences section (School Visits card)
+  library-programs.png   → Used in Experiences section (Library Programs card)
+  stem-nights.png        → Used in Experiences section (STEM Nights card)
+  mascot-sessions.png    → Used in Experiences section (Mascot Sessions card)
+  movie-events.png       → Used in Experiences section (Movie Events card)
+  movie-poster.png       → Used in Featured Movie Event section
+
+Already included in this folder:
+  hero-image.jpg         ✓
+  data-character.png     ✓
+  pixel-character.png    ✓
+  logo.png               ✓
+  icon-matters.png       ✓ (kept for reference)
+  icon-theme.png         ✓ (kept for reference)
+  icon-experiences.png   ✓ (kept for reference)
+
+=== CHANGES MADE TO page.tsx ===
+- Experiences section now references: school-visits.png, library-programs.png,
+  stem-nights.png, mascot-sessions.png, movie-events.png (instead of icon-*.png/logo.png)
+- Movie poster now references: movie-poster.png (instead of movie-poster.jpg)

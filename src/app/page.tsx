@@ -63,11 +63,11 @@ export default function Home() {
         </div>
         <div style={{ display:'grid', gridTemplateColumns:'repeat(5,minmax(0,1fr))', gap:18 }} className="exp-row">
           {[
-            { img:'/icon-matters.png', title:'School Visits', desc:'Interactive K–5 sessions that bring data science, stories, and hands-on activities into classrooms.', bg:'#E0FAF6' },
-            { img:'/icon-theme.png', title:'Library Programs', desc:'Family-friendly learning experiences for public libraries, reading programs, and community events.', bg:'#FFF4C7' },
-            { img:'/icon-experiences.png', title:'STEM Nights', desc:'Short, engaging stations where children explore clues, patterns, badges, and data stories.', bg:'#FFE9D8' },
-            { img:'/logo.png', title:'Mascot Sessions', desc:'Memorable character-led sessions with Data and Pixel for photos, activities, and guided learning.', bg:'#E5F4FF' },
-            { img:'/logo.png', title:'Movie Events', desc:'Movie theater experiences that introduce data science through story, imagination, and discovery.', bg:'#EFE6FF' },
+            { img:'/school-visits.png', title:'School Visits', desc:'Interactive K–5 sessions that bring data science, stories, and hands-on activities into classrooms.', bg:'#E0FAF6' },
+            { img:'/library-programs.png', title:'Library Programs', desc:'Family-friendly learning experiences for public libraries, reading programs, and community events.', bg:'#FFF4C7' },
+            { img:'/stem-nights.png', title:'STEM Nights', desc:'Short, engaging stations where children explore clues, patterns, badges, and data stories.', bg:'#FFE9D8' },
+            { img:'/mascot-sessions.png', title:'Mascot Sessions', desc:'Memorable character-led sessions with Data and Pixel for photos, activities, and guided learning.', bg:'#E5F4FF' },
+            { img:'/movie-events.png', title:'Movie Events', desc:'Movie theater experiences that introduce data science through story, imagination, and discovery.', bg:'#EFE6FF' },
           ].map(c => (
             <div key={c.title} style={{ minHeight:285, borderRadius:30, padding:'24px 18px', textAlign:'center', boxShadow:'0 10px 28px rgba(18,48,71,0.11)', transition:'.25s ease', border:'1px solid rgba(18,48,71,0.06)', background:c.bg }}>
               <div style={{ width:110, height:110, margin:'0 auto 18px', display:'grid', placeItems:'center', borderRadius:28, background:'white', boxShadow:'0 8px 18px rgba(18,48,71,0.08)' }}>
@@ -90,7 +90,7 @@ export default function Home() {
         <div style={{ maxWidth:1050, margin:'0 auto', display:'grid', gridTemplateColumns:'0.9fr 1.1fr', gap:42, alignItems:'center', background:'white', borderRadius:42, padding:34, boxShadow:'0 18px 45px rgba(18,48,71,0.16)' }} className="movie-grid">
           <div style={{ position:'relative', minHeight:460, borderRadius:34, background:'linear-gradient(180deg,#00A6A6,#123047)', overflow:'hidden', display:'grid', placeItems:'center', color:'white', textAlign:'center', padding:28 }}>
             <div style={{ position:'absolute', top:18, right:-42, transform:'rotate(35deg)', background:'#FFD447', color:'#123047', padding:'8px 50px', fontWeight:800 }}>Featured</div>
-            <img src="/movie-poster.jpg" alt="DATA & PIXEL movie poster" style={{ width:'100%', height:'100%', minHeight:460, objectFit:'cover', borderRadius:28 }} />
+            <img src="/movie-poster.png" alt="DATA & PIXEL movie poster" style={{ width:'100%', height:'100%', minHeight:460, objectFit:'cover', borderRadius:28 }} />
           </div>
           <div>
             <h3 style={{ fontFamily:"'Baloo 2',cursive", fontSize:'2.35rem', lineHeight:1.05, color:'#047C7C', margin:'0 0 14px' }}>A Data Science Tale:<br />When Data and Pixel Met</h3>
